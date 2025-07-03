@@ -62,29 +62,26 @@ namespace PenisSeeker
                 PenisSeekerSkillDef.rechargeStock = 3;
                 PenisSeekerSkillDef.requiredStock = 1;
                 PenisSeekerSkillDef.stockToConsume = 1;
+                
 
 
-
-                // For the skill icon, you will have to load a Sprite from your own AssetBundle
-                PenisSeekerSkillDef.icon = null;
-                PenisSeekerSkillDef.skillDescriptionToken = "Fire <style=cIsHealing>homing</style> palms at enemies that explode for <style=cIsDamage>300% damage</style>";
+        // For the skill icon, you will have to load a Sprite from your own AssetBundle
+        PenisSeekerSkillDef.icon = null;
+                PenisSeekerSkillDef.skillDescriptionToken = "Fire <style=cIsHealing>homing</style> palms at enemies that explode for <style=cIsDamage>300% damage</style>. Velocity scales off <style=cIsDamage>chakra</style> stacks.";
                 PenisSeekerSkillDef.skillName = "PENIS_BLAST";
                 PenisSeekerSkillDef.skillNameToken = "Penis Blast";
 
-                // This adds our skilldef. If you don't do this, the skill will not work.
-                ContentAddition.AddSkillDef(PenisSeekerSkillDef);
+            // This adds our skilldef. If you don't do this, the skill will not work.
+            ContentAddition.AddSkillDef(PenisSeekerSkillDef);
+            ContentAddition.AddEntityState(typeof(PENISBLAST), out _);
 
-                // Now we add our skill to one of the survivor's skill families
-                // You can change component.primary to component.secondary, component.utility and component.special
-                SkillLocator skillLocator = SeekerBodyPrefab.GetComponent<SkillLocator>();
+            // Now we add our skill to one of the survivor's skill families
+            // You can change component.primary to component.secondary, component.utility and component.special
+            SkillLocator skillLocator = SeekerBodyPrefab.GetComponent<SkillLocator>();
                 SkillFamily skillFamily = skillLocator.primary.skillFamily;
 
                 // Cloned prefab, homing
-                // NEEDS to have three to work, everything else is optional
-                // ProjectileTargetComponent is needed in order to find the target
-                //ProjectileDirectionalTargetFinder is needed in order to see it
-                //ProjectileSteerTowardTarget is what moves it
-
+                
                 exampleProjectilePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC2/Seeker/SpiritPunchFinisherProjectile.prefab").WaitForCompletion().InstantiateClone("ExampleProjectile");
 
 
@@ -92,12 +89,12 @@ namespace PenisSeeker
 
 
                 var homingpiss = exampleProjectilePrefab.AddComponent<ProjectileDirectionalTargetFinder>();
-                homingpiss.lookRange = 55;
-                homingpiss.lookCone = 80;
+                homingpiss.lookRange = 35;
+                homingpiss.lookCone = 35;
                 homingpiss.targetSearchInterval = 0.1f;
                 homingpiss.onlySearchIfNoTarget = true;
-                homingpiss.allowTargetLoss = false;
-                homingpiss.testLoS = false;
+                homingpiss.allowTargetLoss = true;
+                homingpiss.testLoS = true;
                 homingpiss.ignoreAir = false;
                 homingpiss.flierAltitudeTolerance = float.PositiveInfinity;
                 homingpiss.targetComponent = targetcuck;
@@ -105,14 +102,10 @@ namespace PenisSeeker
 
                 var sterpiss = exampleProjectilePrefab.AddComponent<ProjectileSteerTowardTarget>();
                 sterpiss.targetComponent = targetcuck;
-                sterpiss.rotationSpeed = 45;
+                sterpiss.rotationSpeed = 150;
                 sterpiss.yAxisOnly = false;
 
-                var simplefuckingprojectile = exampleProjectilePrefab.GetComponent<ProjectileSimple>();
-                if (simplefuckingprojectile)
-                {
-                    simplefuckingprojectile.updateAfterFiring = true;
-                }
+                
 
                 PrefabAPI.RegisterNetworkPrefab(exampleProjectilePrefab);
                 ContentAddition.AddProjectile(exampleProjectilePrefab);

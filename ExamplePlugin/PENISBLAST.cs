@@ -1,6 +1,5 @@
 ﻿
 using EntityStates;
-using R2API;
 using RoR2;
 using RoR2.Projectile;
 using RoR2.Skills;
@@ -10,7 +9,6 @@ using System.Security.Permissions;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
-using static Rewired.UI.ControlMapper.ControlMapper;
 
 [module: UnverifiableCode]
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -35,7 +33,7 @@ namespace PenisSeeker
         [SerializeField]
         public GameObject projectileprefab = plugin.exampleProjectilePrefab;
 
-     
+
         [SerializeField]
         public GameObject projectileFinisherPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC2/Seeker/SpiritPunchFinisherProjectile.prefab").WaitForCompletion();
 
@@ -52,10 +50,10 @@ namespace PenisSeeker
         public float dmgBuffIncrease = 0.5f;
 
         [SerializeField]
-        public float comboDamageCoefficient = 2;
+        public float comboDamageCoefficient = 1;
 
         [SerializeField]
-        public float force = 2000f;
+        public float force = 3075f;
 
         public static float attackSpeedAltAnimationThreshold = 1;
 
@@ -75,9 +73,15 @@ namespace PenisSeeker
         public float attackSoundPitch;
 
         [SerializeField]
+        public bool enableVelocityOverLifetime;
+
+        public bool oscillate;
+        //Enable gay mode for projectile
+
         public float bloom;
 
         private float duration;
+        //Controls ANIMATION duration btw smh
 
         private bool hasFiredGauntlet;
 
@@ -119,15 +123,14 @@ namespace PenisSeeker
             if ((bool)animator)
             {
                 childLocator = animator.GetComponent<ChildLocator>();
+
+
+                muzzleString = "MuzzleEnergyBomb";
+                animationStateName = "SpiritPunchFinisher";
+                extraDmgFromBuff = dmgBuffIncrease * (float)base.characterBody.GetBuffCount(DLC2Content.Buffs.ChakraBuff);
+
             }
-            switch (gauntlet)
-            {
-                case Gauntlet.Explode:
-                    muzzleString = "MuzzleEnergyBomb";
-                    animationStateName = "SpiritPunchFinisher";
-                    extraDmgFromBuff = dmgBuffIncrease * (float)base.characterBody.GetBuffCount(DLC2Content.Buffs.ChakraBuff);
-                    break;
-            }
+
             bool num = animator.GetBool("isMoving");
             bool flag = animator.GetBool("isGrounded");
             if (!num && flag)
@@ -138,7 +141,21 @@ namespace PenisSeeker
             PlayCrossfade("Gesture, Additive", animationStateName, "FireGauntlet.playbackRate", duration, 0.025f);
             PlayCrossfade("Gesture, Override", animationStateName, "FireGauntlet.playbackRate", duration, 0.025f);
 
+            int chakras = characterBody.GetBuffCount(DLC2Content.Buffs.ChakraBuff);
+            var simplefuckingprojectile = plugin.exampleProjectilePrefab.GetComponent<ProjectileSimple>();
+            if (simplefuckingprojectile)
+            {
+                simplefuckingprojectile.updateAfterFiring = characterBody.GetBuffCount(DLC2Content.Buffs.ChakraBuff) > (3);
+                simplefuckingprojectile.enableVelocityOverLifetime = true;
+                simplefuckingprojectile.velocityOverLifetime = AnimationCurve.Linear(1, 1, 5, 3 * chakras * 3);
+                // Controls the projectile velocity overlifetime. First number is frame, second is starting velocity, third is how long it exists for, fourth is ending velocity
+                simplefuckingprojectile.oscillateMagnitude = 15;
+                //Controll how gay the prsojectile is
+                
+            }
         }
+
+
 
 
 
@@ -175,7 +192,7 @@ namespace PenisSeeker
                     };
                     ProjectileManager.instance.FireProjectile(fireProjectileInfo);
                 }
-                AddRecoil(0.3f * recoilAmplitude, 0.1f * recoilAmplitude, -1f * recoilAmplitude, 1f * recoilAmplitude);
+                AddRecoil(0.2f * recoilAmplitude, 0.1f * recoilAmplitude, -1f * recoilAmplitude, 1f * recoilAmplitude);
             }
         }
 
@@ -183,7 +200,7 @@ namespace PenisSeeker
         {
 
             base.FixedUpdate();
-            if (base.fixedAge >= duration - duration * 0.50f || hasFiredGauntlet)
+            if (base.fixedAge >= duration - duration * 0.40f || hasFiredGauntlet)
             {
                 if (gauntlet == Gauntlet.Explode && !hasFiredGauntlet)
                 {
@@ -226,11 +243,11 @@ namespace PenisSeeker
             //Interrupted by anything
             return InterruptPriority.Skill;
         }
-        public override void OnExit()
-        {
-            Debug.Log("HELP: ");
-            base.OnExit();
-        }
+        //public override void OnExit()
+        // {
+        // Debug.Log("HELP: ");
+        // base.OnExit();
+        // }
     }
 }
 
