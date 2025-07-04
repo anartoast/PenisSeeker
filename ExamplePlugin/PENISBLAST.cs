@@ -75,6 +75,9 @@ namespace PenisSeeker
         [SerializeField]
         public bool enableVelocityOverLifetime;
 
+
+        public float lifetime;
+
         public bool oscillate;
         //Enable gay mode for projectile
 
@@ -147,11 +150,11 @@ namespace PenisSeeker
             {
                 simplefuckingprojectile.updateAfterFiring = characterBody.GetBuffCount(DLC2Content.Buffs.ChakraBuff) > (3);
                 simplefuckingprojectile.enableVelocityOverLifetime = true;
-                simplefuckingprojectile.velocityOverLifetime = AnimationCurve.Linear(1, 1, 5, 3 * chakras * 3);
+                simplefuckingprojectile.velocityOverLifetime = AnimationCurve.Linear(1, 1, 4, 3 * chakras * 3);
                 // Controls the projectile velocity overlifetime. First number is frame, second is starting velocity, third is how long it exists for, fourth is ending velocity
                 simplefuckingprojectile.oscillateMagnitude = 15;
                 //Controll how gay the prsojectile is
-                
+                simplefuckingprojectile.lifetime = 60f;
             }
         }
 
