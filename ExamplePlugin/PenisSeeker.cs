@@ -32,19 +32,19 @@ namespace PenisSeeker
 
                 Log.Debug("PENIS BLAST!!");
 
+            var penisBundle = AssetBundle.LoadFromFile(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Info.Location), "penisblast"));
 
 
-                GameObject SeekerBodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC2/Seeker/SeekerBody.prefab").WaitForCompletion();
 
-                // We use LanguageAPI to add strings to the game, in the form of tokens
-                // Please note that it is instead recommended that you use a language file.
-                // More info in https://risk-of-thunder.github.io/R2Wiki/Mod-Creation/Assets/Localization/
-                //LanguageAPI.Add("COMMANDO_PRIMARY_SIMPLEBULLET_NAME", "Simple Bullet Attack");
-                //LanguageAPI.Add("COMMANDO_PRIMARY_SIMPLEBULLET_DESCRIPTION", $"Fire a bullet from your right pistol for <style=cIsDamage>300% damage</style>.");
+            GameObject SeekerBodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC2/Seeker/SeekerBody.prefab").WaitForCompletion();
 
-        
-    
-                SkillDef PenisSeekerSkillDef = ScriptableObject.CreateInstance<SkillDef>();
+           
+
+
+
+
+
+            SkillDef PenisSeekerSkillDef = ScriptableObject.CreateInstance<SkillDef>();
 
 
 
@@ -66,10 +66,10 @@ namespace PenisSeeker
 
 
         // For the skill icon, you will have to load a Sprite from your own AssetBundle
-        PenisSeekerSkillDef.icon = null;
-                PenisSeekerSkillDef.skillDescriptionToken = "Fire <style=cIsHealing>homing</style> palms at enemies that explode for <style=cIsDamage>300% damage</style>. Velocity scales off <style=cIsDamage>chakra</style> stacks.";
+        PenisSeekerSkillDef.icon = penisBundle.LoadAsset<Sprite>("appendageblast");
+                PenisSeekerSkillDef.skillDescriptionToken = "PENISEEEKER_SEEKER_PRIMARY_ALT_DESC";
                 PenisSeekerSkillDef.skillName = "PENIS_BLAST";
-                PenisSeekerSkillDef.skillNameToken = "Penis Blast";
+                PenisSeekerSkillDef.skillNameToken = "PENIS_BLAST_NAME";
 
             // This adds our skilldef. If you don't do this, the skill will not work.
             ContentAddition.AddSkillDef(PenisSeekerSkillDef);

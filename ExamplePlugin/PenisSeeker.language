@@ -1,0 +1,16 @@
+{
+    "strings": {
+        "TOKEN1": "Penis Blast",
+        "TOKEN_DESC": "Fire <style=cIsHealing>homing</style> palms at enemies that explode for <style=cIsDamage>300% damage</style>. Velocity scales off <style=cIsDamage>Tranquility</style> stacks."
+    },
+    "PT-BR": {
+        "TOKEN1": "Explosão Peniana",
+        "TOKEN_DESC": "Atira uma palma espiritual, causando <style=cIsDamage>300% de dano</style>. A palma <style=cIsHealing> persegue</style> inimigos e escala de velocidade com <style=cIsDamage>estoques de tranquilidade</style>"
+      
+    },
+
+    "en": {
+        "TOKEN1": "Penis Blast",
+        "TOKEN_DESC": "Fire <style=cIsHealing>homing</style> palms at enemies that explode for <style=cIsDamage>300% damage</style>. Velocity scales off <style=cIsDamage>Tranquility</style> stacks."
+    }
+}
