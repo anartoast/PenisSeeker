@@ -1,0 +1,6 @@
+{
+    "strings": {
+        "PENIS_BLAST_NAME": "Penis Blast",
+        "PENISEEEKER_SEEKER_PRIMARY_ALT_DESC": "Fire <style=cIsHealing>homing</style> palms at enemies that explode for <style=cIsDamage>300% damage</style>. Velocity scales off <style=cIsDamage>Tranquility</style> stacks."
+    }
+}

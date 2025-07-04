@@ -19,20 +19,26 @@ namespace PenisSeeker
         public const string PluginGUID = PluginAuthor + "toastyteam" + PluginName;
         public const string PluginAuthor = "toastyteam";
         public const string PluginName = "PenisSeeker";
-        public const string PluginVersion = "1.0.0";
+        public const string PluginVersion = "1.0.5";
 
         public static GameObject exampleProjectilePrefab;
-    
-            public void Awake()
-            {
+
+        //NEEDED I THINK
+        //public const string LanguageFolder = "Language";
+
+        public void Awake()
+        {
+            //WRONG SOMEHOW
+            //RoR2.Language.collectLanguageRootFolders += Language_collectLanguageFolder;
+
+            Log.Init(Logger);
 
 
-                Log.Init(Logger);
-
-
-                Log.Debug("PENIS BLAST!!");
-
+            Log.Debug("PENIS BLAST!!");
+        
             var penisBundle = AssetBundle.LoadFromFile(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Info.Location), "penisblast"));
+
+
 
 
 
@@ -121,5 +127,10 @@ namespace PenisSeeker
                 };
 
             }
-        }
+            //THIS WAS IN VILIGERS CODE BUT WHERE DOES IT GO
+            //private void Language_collectLanguageRootFolders(System.Collections.Generic.List<string> folders)
+            //{
+            //folders.Add(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(base.Info.Location), LanguageFolder));
+            //}
     }
+}
