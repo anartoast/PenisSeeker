@@ -54,6 +54,7 @@ namespace PenisSeeker
 
         [SerializeField]
         public float force = 3075f;
+        // i want to make ts scale off chakra aswell
 
         public static float attackSpeedAltAnimationThreshold = 1;
 
@@ -149,15 +150,23 @@ namespace PenisSeeker
             if (simplefuckingprojectile)
             {
                 simplefuckingprojectile.updateAfterFiring = characterBody.GetBuffCount(DLC2Content.Buffs.ChakraBuff) > 3;
+                simplefuckingprojectile.desiredForwardSpeed = 15f;
                 simplefuckingprojectile.enableVelocityOverLifetime = true;
-                simplefuckingprojectile.velocityOverLifetime = AnimationCurve.Linear(1, 1, 4, 3 * chakras * 3);
+                simplefuckingprojectile.velocityOverLifetime = AnimationCurve.Linear(1, 1, 2, 1 * chakras * 15);
                 // Controls the projectile velocity overlifetime. First number is frame, second is starting velocity, third is how long it exists for, fourth is ending velocity
-                simplefuckingprojectile.oscillateMagnitude = 15f;
+                //this shit is probably wrong btw ^^^ but idc just change the numbers and see
+                simplefuckingprojectile.oscillateMagnitude = 1000f;
                 //Controll how gay the prsojectile is
-                simplefuckingprojectile.lifetime = 60f;
-                plugin.exampleProjectilePrefab.GetComponent<ProjectileImpactExplosion>().lifetime = 60f;
-                simplefuckingprojectile.lifetimeExpiredEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bell/OmniExplosionVFXBellDeath.prefab").WaitForCompletion();
-                // If the projectile expires without hitting anything it spawns the vfx prefab
+
+
+
+                plugin.exampleProjectilePrefab.GetComponent<ProjectileImpactExplosion>().lifetime = chakras * (3 + 0.1f);
+                simplefuckingprojectile.lifetime = 5f;
+
+
+                // lifetime scaling with chakra (bolean)
+                //NEEDS to be multiplied (*) ig? numbers may change lmao
+                // WRONG SOMETHING IS WRONG GAAHH
 
             }
         }

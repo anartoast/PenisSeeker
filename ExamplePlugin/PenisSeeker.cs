@@ -90,13 +90,14 @@ namespace PenisSeeker
                 
                 exampleProjectilePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC2/Seeker/SpiritPunchFinisherProjectile.prefab").WaitForCompletion().InstantiateClone("ExampleProjectile");
 
+            
+            var targetcuck = exampleProjectilePrefab.AddComponent<ProjectileTargetComponent>();
+            
 
-                var targetcuck = exampleProjectilePrefab.AddComponent<ProjectileTargetComponent>();
 
-
-                var homingpiss = exampleProjectilePrefab.AddComponent<ProjectileDirectionalTargetFinder>();
+            var homingpiss = exampleProjectilePrefab.AddComponent<ProjectileDirectionalTargetFinder>();
                 homingpiss.lookRange = 35;
-                homingpiss.lookCone = 35;
+                homingpiss.lookCone = 15;
                 homingpiss.targetSearchInterval = 0.1f;
                 homingpiss.onlySearchIfNoTarget = true;
                 homingpiss.allowTargetLoss = true;
@@ -108,7 +109,7 @@ namespace PenisSeeker
 
                 var sterpiss = exampleProjectilePrefab.AddComponent<ProjectileSteerTowardTarget>();
                 sterpiss.targetComponent = targetcuck;
-                sterpiss.rotationSpeed = 150;
+                sterpiss.rotationSpeed = 135;
                 sterpiss.yAxisOnly = false;
 
                 
@@ -132,5 +133,6 @@ namespace PenisSeeker
             //{
             //folders.Add(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(base.Info.Location), LanguageFolder));
             //}
+            //slur
     }
 }
