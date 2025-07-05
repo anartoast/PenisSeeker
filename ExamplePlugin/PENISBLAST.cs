@@ -148,13 +148,17 @@ namespace PenisSeeker
             var simplefuckingprojectile = plugin.exampleProjectilePrefab.GetComponent<ProjectileSimple>();
             if (simplefuckingprojectile)
             {
-                simplefuckingprojectile.updateAfterFiring = characterBody.GetBuffCount(DLC2Content.Buffs.ChakraBuff) > (3);
+                simplefuckingprojectile.updateAfterFiring = characterBody.GetBuffCount(DLC2Content.Buffs.ChakraBuff) > 3;
                 simplefuckingprojectile.enableVelocityOverLifetime = true;
                 simplefuckingprojectile.velocityOverLifetime = AnimationCurve.Linear(1, 1, 4, 3 * chakras * 3);
                 // Controls the projectile velocity overlifetime. First number is frame, second is starting velocity, third is how long it exists for, fourth is ending velocity
-                simplefuckingprojectile.oscillateMagnitude = 15;
+                simplefuckingprojectile.oscillateMagnitude = 15f;
                 //Controll how gay the prsojectile is
                 simplefuckingprojectile.lifetime = 60f;
+                plugin.exampleProjectilePrefab.GetComponent<ProjectileImpactExplosion>().lifetime = 60f;
+                simplefuckingprojectile.lifetimeExpiredEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bell/OmniExplosionVFXBellDeath.prefab").WaitForCompletion();
+                // If the projectile expires without hitting anything it spawns the vfx prefab
+
             }
         }
 
