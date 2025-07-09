@@ -160,8 +160,8 @@ namespace PenisSeeker
 
 
 
-                plugin.exampleProjectilePrefab.GetComponent<ProjectileImpactExplosion>().lifetime = chakras * (3 + 0.1f);
-                simplefuckingprojectile.lifetime = 5f;
+                //plugin.exampleProjectilePrefab.GetComponent<ProjectileImpactExplosion>().lifetime = chakras * (3 + 0.1f);
+                //simplefuckingprojectile.lifetime = 5f;
 
 
                 // lifetime scaling with chakra (bolean)
