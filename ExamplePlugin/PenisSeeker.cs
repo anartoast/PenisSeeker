@@ -73,13 +73,8 @@ namespace PenisSeeker
 
         // For the skill icon, you will have to load a Sprite from your own AssetBundle
         PenisSeekerSkillDef.icon = penisBundle.LoadAsset<Sprite>("appendageblast");
-            PenisSeekerSkillDef.skillDescriptionToken = "Fire <style=cIsHealing>homing</style> palms at enemies that explode for <style=cIsDamage>300% damage</style>. Velocity scales off <style=cIsDamage>Tranquility</style> stacks.";
-            PenisSeekerSkillDef.skillName = "PENIS_BLAST";
-            PenisSeekerSkillDef.skillNameToken = "Penis Blast";
-            //REPLACE WITH THIS ONCE WE UNFUCK LANGUAGE JSON FILES
-            // PenisSeekerSkillDef.skillDescriptionToken = "PENISEEEKER_SEEKER_PRIMARY_ALT_DESC";
-            //PenisSeekerSkillDef.skillName = "PENIS_BLAST";
-            //PenisSeekerSkillDef.skillNameToken = "PENIS_BLAST_NAME";
+            PenisSeekerSkillDef.skillDescriptionToken = "PENISEEEKER_SEEKER_PRIMARY_ALT_DESC";
+            PenisSeekerSkillDef.skillNameToken = "PENIS_BLAST_NAME";
 
             // This adds our skilldef. If you don't do this, the skill will not work.
             ContentAddition.AddSkillDef(PenisSeekerSkillDef);
